@@ -18,8 +18,8 @@ namespace ParentsWS.Controllers
     {
         private ChildrensContext db = new ChildrensContext();
 
-        // GET: api/Childrens/ForCurrentParent
-        [Route("api/Childrens/ForCurrentParent")]
+        // GET: api/Childrens/FromCurrentParent
+        [Route("api/Childrens/FromCurrentParent")]
         public IQueryable<Childrens> GetChildrensForCurrentParent()
         {
             string userId = User.Identity.GetUserId();
