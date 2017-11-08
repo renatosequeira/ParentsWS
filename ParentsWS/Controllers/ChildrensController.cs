@@ -134,9 +134,21 @@ namespace ParentsWS.Controllers
         [HttpGet]
         public IQueryable<Childrens> SearchChildrens(string keyword)
         {
-            return db.Childrens.Where(c => c.FirstName.Contains(keyword) || 
-            c.LastName.Contains(keyword) || c.CC.Contains(keyword) 
+            return db.Childrens.Where(c => c.FirstName.Contains(keyword) ||
+            c.LastName.Contains(keyword) || c.CC.Contains(keyword)
             || c.MiddleName.Contains(keyword));
+        }
+
+        // GET: api/Childrens/Search/{keyword}
+        [Route("api/Childrens/Search/FromCurrentParent/{keyword}")]
+        [HttpGet]
+        public IQueryable<Childrens> SearchChildrensForCurrentParent(string keyword)
+        {
+            string userId = User.Identity.GetUserId();
+
+            return db.Childrens.Where(c => c.FirstName.Contains(keyword) ||
+            c.LastName.Contains(keyword) || c.CC.Contains(keyword)
+            || c.MiddleName.Contains(keyword) && c.ParentOneID == userId);
         }
         #endregion
 
