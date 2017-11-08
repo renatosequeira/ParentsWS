@@ -27,6 +27,7 @@ namespace ParentsWS.Controllers
             return db.Childrens.Where(idea => idea.ParentOneID == userId);
         }
 
+        // GET: api/Childrens
         public IQueryable<Childrens> GetChildrens()
         {
             return db.Childrens;
@@ -126,6 +127,18 @@ namespace ParentsWS.Controllers
 
             return Ok(childrens);
         }
+
+        #region Search
+        // GET: api/Childrens/Search/{keyword}
+        [Route("api/Childrens/Search/{keyword}")]
+        [HttpGet]
+        public IQueryable<Childrens> SearchChildrens(string keyword)
+        {
+            return db.Childrens.Where(c => c.FirstName.Contains(keyword) || 
+            c.LastName.Contains(keyword) || c.CC.Contains(keyword) 
+            || c.MiddleName.Contains(keyword));
+        }
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
